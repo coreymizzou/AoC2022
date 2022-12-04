@@ -57,15 +57,31 @@ day3 = {
     
 }
 
-priority = 0
-for i in data:
-    middle = len(i) // 2
-    a, b = i[:middle], i[middle:]
+def part1():
+    priority = 0
+    for i in data:
+        middle = len(i) // 2
+        a, b = i[:middle], i[middle:]
     
+        my_str = ''
+        for w in set(a):
+            if w in b:
+                my_str += w
+        priority += day3[my_str]
+    return priority
+    
+def part2():
     my_str = ''
-    for w in set(a):
-        if w in b:
-            my_str += w
-    priority += day3[my_str]
-
-print(priority)
+    priority = 0
+    for i in range(0, len(data), 3):
+        a, b, c = data[i:i+3]
+        my_str = ''
+        for w in set(a):
+            if (w in b) & (w in c):
+                my_str += w
+        priority += day3[my_str]
+    return priority
+        
+        
+print(part1())
+print(part2())
